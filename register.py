@@ -44,18 +44,76 @@ def register():
 def delete3():
     screen3.destroy()
 
-
-def login_success():
-    global screen3
-    screen3 = Toplevel(screen)
-    screen3.title("Success")
-    screen3.geometry("150x100")
-    Label(screen3, text = "").pack()
-    Label(screen3, text = "Login Success").pack()
-    Button(screen3, text = "OK", command = delete3).pack()
-
 def delete4():
     screen4.destroy()
+
+def delete5():
+    screen5.destroy()
+
+def logout():
+    screen7.destroy()
+
+def saved():
+    screen10 = Toplevel(screen)
+    screen10.title("Saved")
+    screen10.geometry("100x100")
+    Label(screen10, text = "").pack()
+    Label(screen10, text = "Saved").pack()
+
+def save():
+
+    filename = raw_filename.get()
+    notes = raw_notes.get()
+
+    data = open(filename, "w")
+    data.write(notes)
+    data.close
+
+    # save screeen
+    saved()
+
+def create_notes():
+    global raw_filename
+    global raw_notes
+    raw_filename = StringVar()
+    raw_notes = StringVar()
+
+    screen9 = Toplevel(screen)
+    screen9.title("Info")
+    screen9.geometry("300x250")
+    Label(screen9, text = "Please enter a filename for the note below : ").pack()
+    Entry(screen9, textvariable = raw_filename).pack()
+    Label(screen9, text = "Please enter the notes for the file below : ").pack()
+    Entry(screen9, textvariable = raw_notes).pack()
+    Button(screen9, text = "Save", command = save).pack()
+
+def view_notes():
+    ########################################12:37
+    # screen8 = Toplevel(screen)
+    # screen8.title("Dashboard")
+    # screen8.geometry("400x400")
+    # Label(screen8, text = "Welcome to the dashboard").pack() 
+
+
+def session():
+    screen8 = Toplevel(screen)
+    screen8.title("Dashboard")
+    screen8.geometry("400x400")
+    Label(screen8, text = "Welcome to the dashboard").pack()
+    Button(screen8, text = "Create Note", command = create_notes).pack()
+    Button(screen8, text = "View Note", command = view_notes).pack()
+    Button(screen8, text = "Delete Note").pack()
+
+def login_success():
+    session()
+    # global screen3
+    # screen3 = Toplevel(screen)
+    # screen3.title("Success")
+    # screen3.geometry("150x100")
+    # Label(screen3, text = "").pack()
+    # Label(screen3, text = "Login Success").pack()
+    # Button(screen3, text = "OK", command = delete3).pack()
+
 
 def password_not_recognized():
     global screen4
@@ -66,8 +124,6 @@ def password_not_recognized():
     Label(screen4, text = "Password Error").pack()
     Button(screen4, text = "OK", command = delete4).pack()
 
-def delete5():
-    screen5.destroy()
 
 def user_not_found():
     global screen5
