@@ -87,13 +87,46 @@ def create_notes():
     Entry(screen9, textvariable = raw_notes).pack()
     Button(screen9, text = "Save", command = save).pack()
 
-def view_notes():
-    ########################################12:37
-    # screen8 = Toplevel(screen)
-    # screen8.title("Dashboard")
-    # screen8.geometry("400x400")
-    # Label(screen8, text = "Welcome to the dashboard").pack() 
+def view_notes1():
+    filename1 = raw_filename1.get()
+    data = open(filename1, "r")
+    data1 = data.read()
+    screen12 = Toplevel(screen)
+    screen12.title("Notes")
+    screen12.geometry("400x400")
+    Label(screen12, text = data1).pack()
 
+def view_notes():
+    screen11 = Toplevel(screen)
+    screen11.title("Info")
+    screen11.geometry("250x250")
+    all_files = os.listdir()
+    Label(screen11, text = "Please use one of the filenames below : ").pack()
+    Label(screen11, text = all_files).pack()
+    global raw_filename1
+    raw_filename1 = StringVar()
+    Entry(screen11, textvariable=raw_filename1).pack()
+    Button(screen11, command=view_notes1, text="OK").pack()
+
+def delete_note1():
+    filename3 = raw_filename2.get()
+    os.remove(filename3)
+    screen14 = Toplevel(screen)
+    screen14.title("Notes")
+    screen14.geometry("400x400")
+    Label(screen14, text = filename3+" removed").pack()
+
+def delete_note():
+    screen13 = Toplevel(screen)
+    screen13.title("Info")
+    screen13.geometry("250x250")
+    all_files = os.listdir()
+    Label(screen13, text = "Please use one of the filenames below : ").pack()
+    Label(screen13, text = all_files).pack()
+    global raw_filename2
+    raw_filename2 = StringVar()
+    Entry(screen13, textvariable=raw_filename2).pack()
+    Button(screen13, command=delete_note1, text="OK").pack()
 
 def session():
     screen8 = Toplevel(screen)
@@ -102,7 +135,7 @@ def session():
     Label(screen8, text = "Welcome to the dashboard").pack()
     Button(screen8, text = "Create Note", command = create_notes).pack()
     Button(screen8, text = "View Note", command = view_notes).pack()
-    Button(screen8, text = "Delete Note").pack()
+    Button(screen8, text = "Delete Note", command = delete_note).pack()
 
 def login_success():
     session()
